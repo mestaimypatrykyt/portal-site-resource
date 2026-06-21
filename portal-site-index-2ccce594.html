@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开云 · 信息聚合与延伸阅读平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #fbe9e0 0%, #f7ded1 30%, #f5d5c0 70%, #f2cdb5 100%);
+            min-height: 100vh;
+            padding: 2.5rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page {
+            max-width: 1120px;
+            width: 100%;
+        }
+
+        /* Hero 区 */
+        .hero {
+            background: white;
+            border-radius: 2.2rem;
+            padding: 3.5rem 2.8rem;
+            margin-bottom: 2.4rem;
+            box-shadow: 0 12px 28px rgba(140, 70, 40, 0.12);
+            text-align: center;
+            backdrop-filter: blur(2px);
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            color: #5f2f1a;
+            letter-spacing: -0.01em;
+            margin-bottom: 1rem;
+        }
+
+        .hero .subhead {
+            color: #7b4a32;
+            font-size: 1.15rem;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .hero .sentence {
+            background: #f7ede7;
+            border-radius: 3rem;
+            padding: 0.9rem 1.8rem;
+            display: inline-block;
+            font-size: 1.05rem;
+            color: #3e281e;
+        }
+
+        .hero .sentence a {
+            color: #b3592c;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid #ecc4b0;
+            transition: 0.2s;
+        }
+
+        .hero .sentence a:hover {
+            border-bottom-color: #b3592c;
+        }
+
+        /* 优势区 — 四卡片 */
+        .advantages {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2.4rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 1.8rem;
+            padding: 1.8rem 1.4rem 1.6rem;
+            box-shadow: 0 6px 16px rgba(120, 60, 30, 0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(120, 60, 30, 0.12);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #4b2a1b;
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card h3::before {
+            content: "▸";
+            color: #b3592c;
+            font-weight: 700;
+        }
+
+        .card p {
+            color: #3a2a1f;
+            font-size: 0.95rem;
+            line-height: 1.55;
+        }
+
+        /* 说明区 / 场景区 - 两列混合 */
+        .detail-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin-bottom: 2.4rem;
+        }
+
+        .info-block {
+            background: white;
+            border-radius: 1.8rem;
+            padding: 2rem 1.8rem;
+            box-shadow: 0 6px 16px rgba(120, 60, 30, 0.08);
+        }
+
+        .info-block h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #4b2a1b;
+            margin-bottom: 1.2rem;
+        }
+
+        .info-block h2 span {
+            background: #ecc4b0;
+            padding: 0 8px;
+            border-radius: 6px;
+        }
+
+        .info-block p {
+            color: #3a2a1f;
+            line-height: 1.7;
+            margin-bottom: 1.2rem;
+            font-size: 0.98rem;
+        }
+
+        .info-block ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-block li {
+            padding: 0.6rem 0 0.6rem 1.6rem;
+            position: relative;
+            color: #3a2a1f;
+            line-height: 1.5;
+            font-size: 0.96rem;
+            border-bottom: 1px solid #f0e0d6;
+        }
+
+        .info-block li:last-child {
+            border-bottom: none;
+        }
+
+        .info-block li::before {
+            content: "·";
+            color: #b3592c;
+            font-weight: 700;
+            position: absolute;
+            left: 0.2rem;
+            font-size: 1.4rem;
+            top: 0.2rem;
+        }
+
+        .info-block .inline-link {
+            color: #b3592c;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 1px dashed #dba98b;
+        }
+
+        .info-block .inline-link:hover {
+            border-bottom-style: solid;
+        }
+
+        /* FAQ 摘要 */
+        .faq-summary {
+            background: white;
+            border-radius: 1.8rem;
+            padding: 2rem 2rem 1.5rem;
+            margin-bottom: 2.4rem;
+            box-shadow: 0 6px 16px rgba(120, 60, 30, 0.08);
+        }
+
+        .faq-summary h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #4b2a1b;
+            margin-bottom: 1.4rem;
+        }
+
+        .faq-item {
+            padding: 1rem 0 1rem 2rem;
+            border-bottom: 1px solid #f0e0d6;
+            position: relative;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item::before {
+            content: "Q";
+            position: absolute;
+            left: 0;
+            top: 1rem;
+            background: #ecc4b0;
+            color: #4b2a1b;
+            font-weight: 700;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            color: #4b2a1b;
+            margin-bottom: 0.3rem;
+        }
+
+        .faq-answer {
+            color: #4d3427;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .faq-answer a {
+            color: #b3592c;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dashed #dba98b;
+        }
+
+        .faq-answer a:hover {
+            border-bottom-style: solid;
+        }
+
+        /* 底部链接 */
+        .footer-links {
+            background: white;
+            border-radius: 2rem;
+            padding: 1.6rem 2.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 1.8rem 2.5rem;
+            box-shadow: 0 6px 16px rgba(120, 60, 30, 0.08);
+        }
+
+        .footer-links a {
+            color: #5f2f1a;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.2rem 0.8rem;
+            border-radius: 2rem;
+            background: #f7ede7;
+            transition: 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            background: #ecc4b0;
+        }
+
+        .footer-links .core {
+            background: #b3592c;
+            color: white;
+            font-weight: 600;
+            padding: 0.4rem 1.2rem;
+        }
+
+        .footer-links .core:hover {
+            background: #9c4826;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 2rem;
+            color: #7b4a32;
+            font-size: 0.85rem;
+            opacity: 0.75;
+        }
+
+        /* 响应式 */
+        @media (max-width: 900px) {
+            .advantages {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .detail-section {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 560px) {
+            body {
+                padding: 1rem 0.8rem;
+            }
+
+            .advantages {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <!-- hero -->
+    <div class="hero">
+        <h1>开云 · 信息检索与延伸</h1>
+        <div class="subhead">
+            面向日常查询、对照参考与深度阅读的内容聚合起点，帮助你在碎片信息中建立清晰脉络。
+        </div>
+        <div class="sentence">
+            从单一关键词出发，逐步展开关联线索 —— 试试在 <a href="https://portal-site-ky.com">开云</a> 中检索一个你感兴趣的领域。
+        </div>
+    </div>
+
+    <!-- 优势区: 四个卡片 -->
+    <div class="advantages">
+        <div class="card">
+            <h3>横向对照</h3>
+            <p>同一主题下的多源信息并排展示，便于快速比较观点、数据与时间线差异。</p>
+        </div>
+        <div class="card">
+            <h3>结构延伸</h3>
+            <p>每个条目附带相关子话题与上下游链接，阅读自然转化为探索路径。</p>
+        </div>
+        <div class="card">
+            <h3>轻量标注</h3>
+            <p>关键词、定义与引用处标注来源与简短注释，减少二次跳转的负担。</p>
+        </div>
+        <div class="card">
+            <h3>渐进展开</h3>
+            <p>内容按逻辑层级折叠，可根据需要逐层展开，保持页面的整洁与节奏。</p>
+        </div>
+    </div>
+
+    <!-- 说明区：两栏 (场景 + 使用提示) -->
+    <div class="detail-section">
+        <div class="info-block">
+            <h2><span>典型场景</span></h2>
+            <p>当你在工作中需要快速了解一个陌生概念，或者写一份摘要时需要交叉验证多个来源，<strong>开云</strong> 提供的结构化索引能减少四处翻阅的成本。</p>
+            <ul>
+                <li>查询术语定义与发展沿革，同时获得延伸阅读清单</li>
+                <li>对比同一事件的不同表述，定位核心分歧点</li>
+                <li>从一条文献脚注出发，顺藤摸瓜找到原始论述脉络</li>
+                <li>整理零散笔记时，借助平台分类体系补全缺失环节</li>
+            </ul>
+            <p style="margin-top:1rem;">每个场景都指向同一个需求：<strong>高效地查阅、对照与延伸</strong>。</p>
+        </div>
+        <div class="info-block">
+            <h2><span>使用提示</span></h2>
+            <p>为获得更精准的对照结果，建议在搜索时使用 <strong>核心名词 + 限定范围</strong> 的组合，例如 “供应链 2024 报告” 而非泛指。</p>
+            <p>页面内提供的“延伸阅读”区块基于语义关联生成，并非全面推荐，请结合自身判断进行筛选。</p>
+            <p>若需要批量整理文献或笔记，可尝试将多个关键词依次输入 <a href="https://portal-site-ky.com" class="inline-link">开云</a> 的检索栏，利用历史记录回溯关联。</p>
+            <p style="margin-top:0.6rem; background: #f7ede7; padding:0.6rem 1rem; border-radius:1.2rem;">
+                💡 定期清除或归档历史记录有助于保持对照列表的清晰度。
+            </p>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要 -->
+    <div class="faq-summary">
+        <h2>常见疑问 · 摘要</h2>
+        <div class="faq-item">
+            <div class="faq-question">开云的内容来源是什么？</div>
+            <div class="faq-answer">聚合自开放的学术摘要、公共知识库与经过筛选的行业简报，所有引用均附带可溯源标识。具体收录范围可在 <a href="https://portal-site-ky.com">开云</a> 的“关于”页面查看。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">是否需要注册才能使用对照功能？</div>
+            <div class="faq-answer">基础的查询与对照无需账户。保存检索历史和建立个人延伸列表需注册，注册为免费。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">“延伸阅读”的推荐逻辑是怎样的？</div>
+            <div class="faq-answer">根据当前条目中的关键词共现频率、引用网络以及分类标签进行匹配，每次刷新会微调权重以展示不同侧面。</div>
+        </div>
+    </div>
+
+    <!-- footer-links 底部链接 -->
+    <div class="footer-links">
+        <a href="https://portal-site-ky.com" class="core">开云</a>
+        <a href="https://portal-site-ky.com/guide">使用向导</a>
+        <a href="https://portal-site-ky.com/collections">精选对照</a>
+        <a href="https://portal-site-ky.com/about">关于平台</a>
+        <a href="https://portal-site-ky.com/feedback">反馈建议</a>
+    </div>
+    <div class="footer-note">
+        日常查询 · 对照参考 · 延伸阅读
+    </div>
+</div>
+</body>
+</html>
